@@ -18,6 +18,21 @@ class Box(models.Model):
 
 
 class Game(models.Model):
+    INITIAL = 'I'
+    STARTED = 'S'
+    WON = 'W'
+    LOST = 'L'
+    STATUS_CHOICES = [
+        (INITIAL, 'Initial'),
+        (STARTED, 'Started'),
+        (WON, 'Won'),
+        (LOST, 'Lost'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=INITIAL)
+    started_time = models.DateTimeField()
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
+
+    def get_status(self):
+        return self.get_status_display()
 

@@ -8,8 +8,3 @@ class HelloView(APIView):
 
     def get(self, request):
         return Response({'message': 'Hello, World!'})
-
-
-'''
-r = requests.get(url, headers={'Authorization': 'Token f537b208354de36bcc527ad4001cba971658b6a4'})
-'''

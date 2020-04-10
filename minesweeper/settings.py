@@ -40,9 +40,6 @@ INSTALLED_APPS = [
 
     # Third-Party Apps
     'rest_framework',
-
-    # Local Apps (Your project's apps)
-    'minesweeper.main',
 ]
 
 MIDDLEWARE = [

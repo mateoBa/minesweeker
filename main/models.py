@@ -9,12 +9,18 @@ class Matrix(models.Model):
 
 
 class Box(models.Model):
+    # Assuming 99 as representation of mines to do it simpler
+    MINE = 99
+
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
     is_hidden = models.BooleanField(default=True)
     has_flag = models.BooleanField(default=False)
     x = models.IntegerField(default=0)
     y = models.IntegerField(default=0)
+
+    def sum(self):
+        self.value += 1
 
 
 class Game(models.Model):

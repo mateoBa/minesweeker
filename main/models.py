@@ -67,8 +67,8 @@ class Game(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=INITIAL)
-    started_time = models.DateTimeField()
-    ended_time = models.DateTimeField()
+    started_time = models.DateTimeField(default=None, blank=True)
+    ended_time = models.DateTimeField(default=None, blank=True)
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
 
     def get_status(self):

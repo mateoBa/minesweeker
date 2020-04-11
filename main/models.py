@@ -9,6 +9,15 @@ class Matrix(models.Model):
     rows = models.IntegerField(blank=False)
     mines = models.IntegerField(blank=False)
 
+    def to_string(self):
+        result = []
+        for x in range(self.columns):
+            row = []
+            for y in range(self.rows):
+                row.append(Box.objects.get(matrix=self, x=x, y=y).to_string())
+            result.append(row)
+        return result
+
 
 class Box(models.Model):
     # Assuming 99 as representation of mines to do it simpler
@@ -36,6 +45,13 @@ class Box(models.Model):
     def put_mine(self):
         self.value = self.MINE
         self.save()
+
+    def to_string(self):
+        if self.is_hidden:
+            return '?'
+        if self.value == 99:
+            return '*'
+        return self.value
 
 
 class Game(models.Model):

@@ -69,3 +69,18 @@ class GameController:
             self.game.lose_game()
         elif not self.matrix_controller.get_boxes(is_hidden=True):
             self.game.lose_game()
+
+
+class UserController:
+    def __init__(self, user):
+        self.user = user
+
+    def get_games_by_user(self):
+        games = Game.objects.filter(user=self.user)
+        return [g.to_string() for g in games]
+
+    def create_game(self, columns, rows, mines):
+        # todo: check the correct number of columns, rows and mines
+        game = GameController(self.user, int(columns), int(rows), int(mines))
+        matrix = game.matrix_controller.get_matrix()
+        return matrix.to_string()

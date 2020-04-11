@@ -13,8 +13,6 @@ class GameApiView(APIView):
         return Response({'games': user_controller.get_games_by_user()})
 
     def post(self, request):
-        import pdb
-        pdb.set_trace()
         user = request.user
         user_controller = UserController(user)
         game = user_controller.create_game(request.data.get('columns'),

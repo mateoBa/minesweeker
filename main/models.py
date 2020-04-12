@@ -85,6 +85,7 @@ class Game(models.Model):
     def lose_game(self):
         self.status = self.LOST
         self.ended_time = datetime.datetime.now()
+        self.save()
         [box.press() for box in Box.objects.filter(matrix=self.matrix, value=Box.MINE)]
 
     def win_game(self):

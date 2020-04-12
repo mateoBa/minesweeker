@@ -49,9 +49,7 @@ class Box(models.Model):
     def to_string(self):
         if self.is_hidden:
             return '?'
-        if self.value == 99:
-            return '*'
-        return self.value
+        return '*' if self.value == self.MINE else self.value
 
 
 class Game(models.Model):
@@ -100,3 +98,8 @@ class Game(models.Model):
             'status': self.get_status_display(),
             'started_time': self.started_time.strftime('%m-%d-%Y %H:%M') if self.started_time else '-'
         }
+
+
+class SettingUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game_selected = models.ForeignKey(Game, on_delete=models.CASCADE)

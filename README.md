@@ -1,16 +1,16 @@
-# Minesweeker
+# Minesweeper
 
 API RESTful to perform the game
 
 Instalation
 
 ```sh
-$ git clone https://github.com/mateoBa/minesweeker.git
-$ cd minesweeker
-$ pip install -r requirements.txt
-$ python manage.py migrate
-$ python manage.py createsuperuser
-$ python manage.py runserver
+$ git clone https://github.com/mateoBa/minesweeper.git
+$ cd minesweeper
+$ pip3 install -r requirements.txt
+$ python3 manage.py migrate
+$ python3 manage.py createsuperuser
+$ python3 manage.py runserver
 ```
 
 Implementing api. Examples with http but you can use whatever you want CURL, python requests ...

@@ -39,4 +39,4 @@ $ http put http://127.0.0.1:8000/api/v1/game x=X y=Y 'Authorization: Token Token
 
 I am taking some basic rules to draw the matrix. I am returning list of list to do simpler to test it, but if it will be implemented in a clint we should send the entire information and the client is going to represent it in the best way.
 
-Using the ? sign to represent a hidden box and '*' sign to represent.
+Using the ? sign to represent a hidden box and '*' sign to represent a Bomb. The api returns the matrix in list of list, every list is a column just in case. 

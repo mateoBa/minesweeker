@@ -85,7 +85,7 @@ class Game(models.Model):
     def lose_game(self):
         self.status = self.LOST
         self.ended_time = datetime.datetime.now()
-        self.save()
+        [box.press() for box in Box.objects.filter(matrix=self.matrix, value=Box.MINE)]
 
     def win_game(self):
         self.status = Game.WON
@@ -95,6 +95,7 @@ class Game(models.Model):
     def to_string(self):
         return {
             'user': self.user.username,
+            'matrix': self.matrix.to_string(),
             'status': self.get_status_display(),
             'started_time': self.started_time.strftime('%m-%d-%Y %H:%M') if self.started_time else '-'
         }
@@ -103,3 +104,13 @@ class Game(models.Model):
 class SettingUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     game_selected = models.ForeignKey(Game, on_delete=models.CASCADE)
+
+    @classmethod
+    def create_or_save(cls, user, game):
+        if cls.objects.filter(user=user):
+            settings = SettingUser.objects.get(user=user)
+            settings.game_selected = game
+            settings.save()
+            return
+
+        cls.objects.create(user=user, game_selected=game)
